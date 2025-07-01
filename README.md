@@ -8,7 +8,7 @@
 
 ## 🖼️ Preview
 
-![Pawned Screenshot](pawned.png)  
+![Pawned Screenshot](/public/pawned.png)  
 > *Screenshot of the retro UI with classic chessboard and stylized components*
 
 ---
