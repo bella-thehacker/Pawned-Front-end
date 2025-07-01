@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 245 245 220; /* off-white */
+    --foreground: 70 66 20; /* sepia */
+    --card: 241 233 210; /* parchment */
+    --card-foreground: 70 66 20;
+    --popover: 241 233 210;
+    --popover-foreground: 70 66 20;
+    --primary: 139 69 19; /* vintage brown */
+    --primary-foreground: 245 245 220;
+    --secondary: 107 142 35; /* olive */
+    --secondary-foreground: 245 245 220;
+    --muted: 255 219 88; /* mustard */
+    --muted-foreground: 70 66 20;
+    --accent: 107 140 174; /* dusty blue */
+    --accent-foreground: 245 245 220;
+    --destructive: 220 38 38;
+    --destructive-foreground: 248 250 252;
+    --border: 139 69 19;
+    --input: 241 233 210;
+    --ring: 139 69 19;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-mono;
+    background-image: radial-gradient(circle at 1px 1px, rgba(139, 69, 19, 0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+}
+
+@layer components {
+  .retro-button {
+    @apply bg-vintage-brown text-vintage-off-white px-6 py-3 font-mono font-semibold 
+           border-2 border-vintage-sepia shadow-[4px_4px_0px_0px_rgba(70,66,20,1)]
+           hover:shadow-[2px_2px_0px_0px_rgba(70,66,20,1)] hover:translate-x-[2px] hover:translate-y-[2px]
+           transition-all duration-150 active:shadow-none active:translate-x-[4px] active:translate-y-[4px];
+  }
+
+  .retro-card {
+    @apply bg-vintage-parchment border-2 border-vintage-sepia p-6 
+           shadow-[8px_8px_0px_0px_rgba(139,69,19,0.3)];
+  }
+
+  .chess-square-light {
+    @apply bg-vintage-cream;
+  }
+
+  .chess-square-dark {
+    @apply bg-vintage-brown;
+  }
+}
