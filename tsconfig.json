@@ -1,18 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2020",                     // ✅ Must be at least ES2015 for private fields
-    "module": "ESNext",                     // ✅ Required for modern packages like react-router-dom
-    "moduleResolution": "NodeNext",         // ✅ Fixes the 'dom-export.d.mts' error
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@/components/*": ["src/components/*"]
+      "@/*": ["src/*"]
     },
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
   "include": ["src"]
