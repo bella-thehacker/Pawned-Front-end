@@ -4,7 +4,7 @@ import { useState } from "react"
 import { TopNav } from "@/components/TopNav"
 import { CustomButton } from "@/components/CustomButton"
 import { GameCard } from "@/components/GameCard"
-import {  useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { Bot, Zap, Target, Crown } from "lucide-react"
 
@@ -42,10 +42,15 @@ const difficulties = [
 export default function PlayRobot() {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null)
   const navigate = useNavigate()
+  const [selectedColor, setSelectedColor] = useState("white")
+  const [selectedTheme, setSelectedTheme] = useState("classic")
+  const [selectedTime, setSelectedTime] = useState("600+0")
 
   const handleStartGame = () => {
     if (selectedDifficulty) {
-      navigate(`/game?mode=robot&difficulty=${selectedDifficulty}`)
+      navigate(
+        `/game?mode=robot&difficulty=${selectedDifficulty}&color=${selectedColor}&theme=${selectedTheme}&time=${selectedTime}`
+      )
     }
   }
 
@@ -69,7 +74,7 @@ export default function PlayRobot() {
                     key={difficulty.id}
                     title={difficulty.name}
                     description={difficulty.description}
-                    className={`${
+                    className={`$ {
                       selectedDifficulty === difficulty.id
                         ? "ring-4 ring-vintage-brown shadow-[16px_16px_0px_0px_rgba(139,69,19,0.5)]"
                         : ""
@@ -99,35 +104,50 @@ export default function PlayRobot() {
             <div className="grid md:grid-cols-3 gap-4 mb-6">
               <div>
                 <label className="block font-mono text-sm text-vintage-sepia mb-2">Time Control</label>
-                <select className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono">
-                  <option>10 + 0</option>
-                  <option>15 + 10</option>
-                  <option>30 + 0</option>
-                  <option>No Limit</option>
+                <select
+                  className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                >
+                  <option value="600+0">10 + 0</option>
+                  <option value="900+10">15 + 10</option>
+                  <option value="1800+0">30 + 0</option>
+                  <option value="0+0">No Limit</option>
                 </select>
               </div>
 
               <div>
                 <label className="block font-mono text-sm text-vintage-sepia mb-2">Your Color</label>
-                <select className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono">
-                  <option>White</option>
-                  <option>Black</option>
-                  <option>Random</option>
+                <select
+                  value={selectedColor}
+                  onChange={(e) => setSelectedColor(e.target.value.toLowerCase())}
+                  className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
+                >
+                  <option value="white">White</option>
+                  <option value="black">Black</option>
+                  <option value="random">Random</option>
                 </select>
               </div>
 
               <div>
                 <label className="block font-mono text-sm text-vintage-sepia mb-2">Board Style</label>
-                <select className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono">
-                  <option>Classic</option>
-                  <option>Vintage</option>
-                  <option>Minimal</option>
+                <select
+                  onChange={(e) => setSelectedTheme(e.target.value.toLowerCase())}
+                  className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
+                >
+                  <option value="classic">Classic</option>
+                  <option value="vintage">Vintage</option>
+                  <option value="minimal">Minimal</option>
                 </select>
               </div>
             </div>
 
             <div className="flex justify-center">
-              <CustomButton size="lg" onClick={handleStartGame} disabled={!selectedDifficulty} className="px-12">
+              <CustomButton
+                size="lg"
+                onClick={handleStartGame}
+                disabled={!selectedDifficulty}
+                className="px-12"
+              >
                 Start Game
               </CustomButton>
             </div>
