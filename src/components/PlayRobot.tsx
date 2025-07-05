@@ -74,7 +74,7 @@ export default function PlayRobot() {
                     key={difficulty.id}
                     title={difficulty.name}
                     description={difficulty.description}
-                    className={`$ {
+                    className={`${
                       selectedDifficulty === difficulty.id
                         ? "ring-4 ring-vintage-brown shadow-[16px_16px_0px_0px_rgba(139,69,19,0.5)]"
                         : ""
@@ -106,7 +106,8 @@ export default function PlayRobot() {
                 <label className="block font-mono text-sm text-vintage-sepia mb-2">Time Control</label>
                 <select
                   className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
-                  onChange={(e) => setSelectedTime(e.target.value)}
+                  onChange={(e) => setSelectedTime((e.target as HTMLSelectElement).value)}
+
                 >
                   <option value="600+0">10 + 0</option>
                   <option value="900+10">15 + 10</option>
@@ -119,7 +120,8 @@ export default function PlayRobot() {
                 <label className="block font-mono text-sm text-vintage-sepia mb-2">Your Color</label>
                 <select
                   value={selectedColor}
-                  onChange={(e) => setSelectedColor(e.target.value.toLowerCase())}
+                  onChange={(e) => setSelectedColor((e.target as HTMLSelectElement).value.toLowerCase())}
+
                   className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
                 >
                   <option value="white">White</option>
@@ -131,7 +133,8 @@ export default function PlayRobot() {
               <div>
                 <label className="block font-mono text-sm text-vintage-sepia mb-2">Board Style</label>
                 <select
-                  onChange={(e) => setSelectedTheme(e.target.value.toLowerCase())}
+                  onChange={(e) => setSelectedTheme((e.target as HTMLSelectElement).value.toLowerCase())}
+
                   className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
                 >
                   <option value="classic">Classic</option>

@@ -1,5 +1,6 @@
 // components/ChessBoard.tsx
-import { useState } from "react"
+import { useState, forwardRef, useImperativeHandle } from "react"
+
 import { Chessboard } from "react-chessboard"
 import { Chess } from "chess.js"
 
@@ -24,7 +25,12 @@ const themeColors: Record<ChessBoardProps["theme"], { light: string; dark: strin
   },
 }
 
-export default function ChessBoard({ theme, playerColor, onMove }: ChessBoardProps) {
+
+
+ const ChessBoard = forwardRef(function ChessBoard(
+  { theme, playerColor, onMove }: ChessBoardProps,
+  ref
+) {
   const [game] = useState(new Chess())
   const [position, setPosition] = useState(game.fen())
 
@@ -39,6 +45,13 @@ export default function ChessBoard({ theme, playerColor, onMove }: ChessBoardPro
     }
     return false
   }
+
+  // 👇 Expose makeMove through the ref
+  useImperativeHandle(ref, () => ({
+    movePiece: (from: string, to: string) => {
+      makeMove(from, to)
+    },
+  }))
 
   return (
     <div className="border-4 border-vintage-sepia p-2 rounded-lg shadow-md">
@@ -57,4 +70,7 @@ export default function ChessBoard({ theme, playerColor, onMove }: ChessBoardPro
       />
     </div>
   )
-}
+})
+
+export default ChessBoard
+
