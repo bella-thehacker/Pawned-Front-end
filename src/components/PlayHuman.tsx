@@ -27,13 +27,21 @@ export default function PlayHuman() {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const handleStartGame = () => {
-    if (gameMode === "local") {
-      navigate("/game?mode=local")
-    } else if (gameMode === "online" && roomCode) {
-      navigate(`/game?mode=online&room=${roomCode}`)
-    }
+ const handleStartGame = () => {
+  if (gameMode === "local") {
+    navigate("/play-local");
+  } else if (gameMode === "online" && roomCode) {
+    const searchParams = new URLSearchParams({
+      room: roomCode,
+      color: "white", // or "black" or randomize
+      theme: "vintage", // replace with actual selected theme if needed
+      time: "600+0",    // replace with selected time control
+    });
+
+    navigate(`/online-games?${searchParams.toString()}`);
   }
+};
+
 
   return (
     <div className="min-h-screen bg-vintage-off-white">
@@ -162,7 +170,7 @@ export default function PlayHuman() {
                   size="lg"
                   onClick={handleStartGame}
                   disabled={gameMode === "online" && !roomCode}
-                  className="px-12"
+                  className="px-12"/*  */
                 >
                   Start Game
                 </CustomButton>

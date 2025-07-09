@@ -7,6 +7,8 @@ import Continue from "./components/Continue"
 import PlayRobot from "./components/PlayRobot"
 import PlayHuman from "./components/PlayHuman"
 import GamePage from "./components/GamePage"
+import PlayLocal from "./components/PlayLocal"
+import OnlineGames from "./components/OnlineGames"
 
 
 function App() {
@@ -20,6 +22,9 @@ function App() {
       <Route path="/PlayRobot" element={<PlayRobot/>} />
       <Route path="/PlayHuman" element={<PlayHuman />} />
       <Route path="/game" element={<GamePage />} />
+      <Route path="/play-local" element={<PlayLocal />} />
+       <Route path="/online-games" element={<OnlineGames />} />
+    
       </Routes>
     </>
   )

@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { TopNav } from "@/components/TopNav"
-import { CustomButton } from "@/components/CustomButton"
-import { GameCard } from "@/components/GameCard"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { TopNav } from "@/components/TopNav";
+import { CustomButton } from "@/components/CustomButton";
+import { GameCard } from "@/components/GameCard";
+import { useNavigate } from "react-router-dom";
 
-import { Bot, Zap, Target, Crown } from "lucide-react"
+import { Bot, Zap, Target, Crown } from "lucide-react";
 
 const difficulties = [
   {
@@ -37,22 +37,23 @@ const difficulties = [
     icon: Crown,
     color: "text-red-600",
   },
-]
+];
 
 export default function PlayRobot() {
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null)
-  const navigate = useNavigate()
-  const [selectedColor, setSelectedColor] = useState("white")
-  const [selectedTheme, setSelectedTheme] = useState("classic")
-  const [selectedTime, setSelectedTime] = useState("600+0")
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const [selectedColor, setSelectedColor] = useState("white");
+  const [selectedTheme, setSelectedTheme] = useState("classic");
+  const [selectedTime, setSelectedTime] = useState("600+0");
+  const [allowUndo, setAllowUndo] = useState(true);
 
   const handleStartGame = () => {
     if (selectedDifficulty) {
       navigate(
-        `/game?mode=robot&difficulty=${selectedDifficulty}&color=${selectedColor}&theme=${selectedTheme}&time=${selectedTime}`
-      )
+        `/game?mode=robot&difficulty=${selectedDifficulty}&color=${selectedColor}&theme=${selectedTheme}&time=${selectedTime}&undo=${allowUndo}`
+      );
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-vintage-off-white">
@@ -68,13 +69,13 @@ export default function PlayRobot() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {difficulties.map((difficulty) => {
-                const Icon = difficulty.icon
+                const Icon = difficulty.icon;
                 return (
                   <GameCard
                     key={difficulty.id}
                     title={difficulty.name}
                     description={difficulty.description}
-                    className={`${
+                    className={`$ {
                       selectedDifficulty === difficulty.id
                         ? "ring-4 ring-vintage-brown shadow-[16px_16px_0px_0px_rgba(139,69,19,0.5)]"
                         : ""
@@ -87,12 +88,12 @@ export default function PlayRobot() {
                         {Array.from({ length: difficulties.findIndex((d) => d.id === difficulty.id) + 1 }).map(
                           (_, i) => (
                             <div key={i} className="w-3 h-3 bg-vintage-brown rounded-full"></div>
-                          ),
+                          )
                         )}
                       </div>
                     </div>
                   </GameCard>
-                )
+                );
               })}
             </div>
           </div>
@@ -107,7 +108,6 @@ export default function PlayRobot() {
                 <select
                   className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
                   onChange={(e) => setSelectedTime((e.target as HTMLSelectElement).value)}
-
                 >
                   <option value="600+0">10 + 0</option>
                   <option value="900+10">15 + 10</option>
@@ -121,7 +121,6 @@ export default function PlayRobot() {
                 <select
                   value={selectedColor}
                   onChange={(e) => setSelectedColor((e.target as HTMLSelectElement).value.toLowerCase())}
-
                   className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
                 >
                   <option value="white">White</option>
@@ -134,7 +133,6 @@ export default function PlayRobot() {
                 <label className="block font-mono text-sm text-vintage-sepia mb-2">Board Style</label>
                 <select
                   onChange={(e) => setSelectedTheme((e.target as HTMLSelectElement).value.toLowerCase())}
-
                   className="w-full p-2 border-2 border-vintage-sepia bg-vintage-parchment font-mono"
                 >
                   <option value="classic">Classic</option>
@@ -143,6 +141,15 @@ export default function PlayRobot() {
                 </select>
               </div>
             </div>
+
+            <label className="flex items-center gap-2 mb-6 font-mono text-sm">
+              <input
+                type="checkbox"
+                checked={allowUndo}
+                onChange={(e) => setAllowUndo(e.target.checked)}
+              />
+              Allow Undo (Uncheck for a real challenge)
+            </label>
 
             <div className="flex justify-center">
               <CustomButton
@@ -158,5 +165,5 @@ export default function PlayRobot() {
         </div>
       </main>
     </div>
-  )
+  );
 }
